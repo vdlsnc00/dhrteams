@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% load wagtailcore_tags wagtailimages_tags %}
+
+{% block content %}
+    <div class="container my-5">
+        <h1>{{ page.title }}</h1>
+        <hr>
+        <div class="row m-5">
+            {% for department in page.get_children %}
+                <div class="col-md-4 col-sm-6 border text-center py-5">
+                    {% image department.specific.logo width-250 %}
+                    <h2 class="mt-4">
+                        <a href="{% pageurl department %}">{{ department.title }}</a>
+                    </h2>
+                </div>
+            
+            {% endfor %}
+        </div>   
+    </div>
+    
+{% endblock content %}

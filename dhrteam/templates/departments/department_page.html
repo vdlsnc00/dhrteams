@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% load static wagtailimages_tags %}
+{% block content %}
+
+<header class="shadow" style="background-image: url('images/header-bg.png'); background-repeat: no-repeat; background-size: cover">
+    <div class="content p-5">
+        <h3 class="subheading">Meet the team</h3>
+        <h1>{{ page.title }}</h1>
+    </div>
+</header>
+
+<main class="container team">
+
+    {% with blocks=page.team %}
+        {% for block in blocks %}
+            <section class="admin p-5 my-5 bg-light shadow">
+                <h2 class="mb-4">{{ block.value.title }}</h2>
+                <div class="row bg-white">
+                    {% for member in block.value.members %}                  
+                        <div class="col-lg-3 col-md-4 col-sm-6 border">
+                            <div class="grid-content text-center">
+                                <div class="image">
+                                    {% image member.photo fill-200x200 %}
+                                </div>
+                                <div class="name">
+                                    <h1>{{ member.full_name }}</h1>
+                                    <span>{{ member.title }}</span>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </section>
+        {% endfor %}
+    {% endwith %}
+    
+
+</main>
+
+{% endblock %}
